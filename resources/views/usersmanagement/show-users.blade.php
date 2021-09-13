@@ -46,11 +46,11 @@
                                     </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="/users/create">
+                                    <a class="dropdown-item" href="{{ url('/users/create') }}">
                                         <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
                                         {!! trans('usersmanagement.buttons.create-new') !!}
                                     </a>
-                                    <a class="dropdown-item" href="/users/deleted">
+                                    <a class="dropdown-item" href="{{ url('/users/deleted') }}">
                                         <i class="fa fa-fw fa-group" aria-hidden="true"></i>
                                         {!! trans('usersmanagement.show-deleted-users') !!}
                                     </a>
@@ -72,15 +72,15 @@
                                 </caption>
                                 <thead class="thead">
                                     <tr>
-                                        <th>{!! trans('usersmanagement.users-table.id') !!}</th>
-                                        <th>{!! trans('usersmanagement.users-table.name') !!}</th>
-                                        <th class="hidden-xs">{!! trans('usersmanagement.users-table.email') !!}</th>
+                                        <th>{!! trans('usersmanagement.users-table.id') !!}</th> 
+                                        
                                         <th class="hidden-xs">{!! trans('usersmanagement.users-table.fname') !!}</th>
                                         <th class="hidden-xs">{!! trans('usersmanagement.users-table.lname') !!}</th>
-                                        <th>{!! trans('usersmanagement.users-table.role') !!}</th>
+                                      
                                         <th class="hidden-sm hidden-xs hidden-md">{!! trans('usersmanagement.users-table.created') !!}</th>
                                         <th class="hidden-sm hidden-xs hidden-md">{!! trans('usersmanagement.users-table.updated') !!}</th>
                                         <th>{!! trans('usersmanagement.users-table.actions') !!}</th>
+                                        <th class="no-search no-sort"></th>
                                         <th class="no-search no-sort"></th>
                                         <th class="no-search no-sort"></th>
                                     </tr>
@@ -88,25 +88,11 @@
                                 <tbody id="users_table">
                                     @foreach($users as $user)
                                         <tr>
-                                            <td>{{$user->id}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td class="hidden-xs"><a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a></td>
+                                            <td>{{$user->id}}</td> 
+                                         
                                             <td class="hidden-xs">{{$user->first_name}}</td>
                                             <td class="hidden-xs">{{$user->last_name}}</td>
-                                            <td>
-                                                @foreach ($user->roles as $user_role)
-                                                    @if ($user_role->name == 'User')
-                                                        @php $badgeClass = 'primary' @endphp
-                                                    @elseif ($user_role->name == 'Admin')
-                                                        @php $badgeClass = 'warning' @endphp
-                                                    @elseif ($user_role->name == 'Unverified')
-                                                        @php $badgeClass = 'danger' @endphp
-                                                    @else
-                                                        @php $badgeClass = 'default' @endphp
-                                                    @endif
-                                                    <span class="badge badge-{{$badgeClass}}">{{ $user_role->name }}</span>
-                                                @endforeach
-                                            </td>
+             
                                             <td class="hidden-sm hidden-xs hidden-md">{{$user->created_at}}</td>
                                             <td class="hidden-sm hidden-xs hidden-md">{{$user->updated_at}}</td>
                                             <td>
@@ -123,6 +109,11 @@
                                             <td>
                                                 <a class="btn btn-sm btn-info btn-block" href="{{ URL::to('users/' . $user->id . '/edit') }}" data-toggle="tooltip" title="Edit">
                                                     {!! trans('usersmanagement.buttons.edit') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning btn-block" href="{{ URL::to('assign-lesson/' . $user->id) }}" data-toggle="tooltip" title="Edit">
+                                                   <i class="fa fa-plus"></i>  Assign Lesson
                                                 </a>
                                             </td>
                                         </tr>

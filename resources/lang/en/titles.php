@@ -20,9 +20,9 @@ return [
 
     'editProfile'       => 'Edit Profile',
     'createProfile'     => 'Create Profile',
-    'adminUserList'     => 'Users Administration',
+    'adminUserList'     => 'Students List',
     'adminEditUsers'    => 'Edit Users',
-    'adminNewUser'      => 'Create New User',
+    'adminNewUser'      => 'Create New Student',
 
     'adminThemesList'   => 'Themes',
     'adminThemesAdd'    => 'Add New Theme',

@@ -60,12 +60,7 @@
                                 </a>
                             </div>
                         </div>
-
-                        <p class="text-center mb-3">
-                            Or Login with
-                        </p>
-
-                        @include('partials.socials-icons')
+ 
 
                     </form>
                 </div>

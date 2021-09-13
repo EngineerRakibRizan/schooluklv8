@@ -70,6 +70,8 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'date_of_birth',
+        'avatar',
         'password',
         'activated',
         'token',
@@ -162,5 +164,9 @@ class User extends Authenticatable
     public function removeProfile(Profile $profile)
     {
         return $this->profiles()->detach($profile);
+    }
+
+    public function lessons(){
+        return $this->belongsToMany(Lesson::class, 'courses', 'user_id', 'lesson_id');
     }
 }

@@ -35,28 +35,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {!! Form::open(array('route' => ['users.update', $user->id], 'method' => 'PUT', 'role' => 'form', 'class' => 'needs-validation')) !!}
+                        {!! Form::open(array('route' => ['users.update', $user->id], 'method' => 'PUT', 'role' => 'form', 'class' => 'needs-validation', 'enctype' => 'multipart/form-data')) !!}
 
                             {!! csrf_field() !!}
 
-                            <div class="form-group has-feedback row {{ $errors->has('name') ? ' has-error ' : '' }}">
-                                {!! Form::label('name', trans('forms.create_user_label_username'), array('class' => 'col-md-3 control-label')); !!}
-                                <div class="col-md-9">
-                                    <div class="input-group">
-                                        {!! Form::text('name', $user->name, array('id' => 'name', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_username'))) !!}
-                                        <div class="input-group-append">
-                                            <label class="input-group-text" for="name">
-                                                <i class="fa fa-fw {{ trans('forms.create_user_icon_username') }}" aria-hidden="true"></i>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    @if($errors->has('name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
+                     
 
                             <div class="form-group has-feedback row {{ $errors->has('first_name') ? ' has-error ' : '' }}">
                                 {!! Form::label('first_name', trans('forms.create_user_label_firstname'), array('class' => 'col-md-3 control-label')); !!}
@@ -96,104 +79,51 @@
                                 </div>
                             </div>
 
-                            <div class="form-group has-feedback row {{ $errors->has('email') ? ' has-error ' : '' }}">
-                                {!! Form::label('email', trans('forms.create_user_label_email'), array('class' => 'col-md-3 control-label')); !!}
+
+                            <div class="form-group has-feedback row {{ $errors->has('date_of_birth') ? ' has-error ' : '' }}">
+                                {!! Form::label('date_of_birth', 'Date of Birth', array('class' => 'col-md-3 control-label')); !!}
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        {!! Form::text('email', $user->email, array('id' => 'email', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_email'))) !!}
+                                        {!! Form::date('date_of_birth', $user->date_of_birth, array('id' => 'date_of_birth', 'class' => 'form-control ', 'placeholder' => 'Date of Birth')) !!}
                                         <div class="input-group-append">
-                                            <label for="email" class="input-group-text">
-                                                <i class="fa fa-fw {{ trans('forms.create_user_icon_email') }}" aria-hidden="true"></i>
+                                            <label class="input-group-text" for="password">
+                                                <i class="fa fa-calendar " aria-hidden="true"></i>
                                             </label>
                                         </div>
                                     </div>
-                                    @if ($errors->has('email'))
+                                    @if ($errors->has('date_of_birth'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong>{{ $errors->first('date_of_birth') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-
-                            <div class="form-group has-feedback row {{ $errors->has('role') ? ' has-error ' : '' }}">
-
-                                {!! Form::label('role', trans('forms.create_user_label_role'), array('class' => 'col-md-3 control-label')); !!}
-
+                            <div class="form-group has-feedback row {{ $errors->has('picture') ? ' has-error ' : '' }}">
+                                {!! Form::label('picture', 'Picture', array('class' => 'col-md-3 control-label')); !!}
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <select class="custom-select form-control" name="role" id="role">
-                                            <option value="">{{ trans('forms.create_user_ph_role') }}</option>
-                                            @if ($roles)
-                                                @foreach($roles as $role)
-                                                    <option value="{{ $role->id }}" {{ $currentRole->id == $role->id ? 'selected="selected"' : '' }}>{{ $role->name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
+                                        {!! Form::file('picture', array('id' => 'picture', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_pw_confirmation'))) !!}
                                         <div class="input-group-append">
-                                            <label class="input-group-text" for="role">
-                                                <i class="{{ trans('forms.create_user_icon_role') }}" aria-hidden="true"></i>
+                                            <label class="input-group-text" for="picture">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
                                             </label>
                                         </div>
                                     </div>
-                                    @if ($errors->has('role'))
+                                    @if ($errors->has('picture'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('role') }}</strong>
+                                            <strong>{{ $errors->first('picture') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-
-                            <div class="pw-change-container">
-                                <div class="form-group has-feedback row {{ $errors->has('password') ? ' has-error ' : '' }}">
-
-                                    {!! Form::label('password', trans('forms.create_user_label_password'), array('class' => 'col-md-3 control-label')); !!}
-
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                            {!! Form::password('password', array('id' => 'password', 'class' => 'form-control ', 'placeholder' => trans('forms.create_user_ph_password'))) !!}
-                                            <div class="input-group-append">
-                                                <label class="input-group-text" for="password">
-                                                    <i class="fa fa-fw {{ trans('forms.create_user_icon_password') }}" aria-hidden="true"></i>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback row {{ $errors->has('password_confirmation') ? ' has-error ' : '' }}">
-
-                                    {!! Form::label('password_confirmation', trans('forms.create_user_label_pw_confirmation'), array('class' => 'col-md-3 control-label')); !!}
-
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                            {!! Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_pw_confirmation'))) !!}
-                                            <div class="input-group-append">
-                                                <label class="input-group-text" for="password_confirmation">
-                                                    <i class="fa fa-fw {{ trans('forms.create_user_icon_pw_confirmation') }}" aria-hidden="true"></i>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        @if ($errors->has('password_confirmation'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
+                      
+ 
                             <div class="row">
                                 <div class="col-12 col-sm-6 mb-2">
-                                    <a href="#" class="btn btn-outline-secondary btn-block btn-change-pw mt-3" title="{{ trans('forms.change-pw')}} ">
-                                        <i class="fa fa-fw fa-lock" aria-hidden="true"></i>
-                                        <span></span> {!! trans('forms.change-pw') !!}
-                                    </a>
+                                    
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    {!! Form::button(trans('forms.save-changes'), array('class' => 'btn btn-success btn-block margin-bottom-1 mt-3 mb-2 btn-save','type' => 'button', 'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => trans('modals.edit_user__modal_text_confirm_title'), 'data-message' => trans('modals.edit_user__modal_text_confirm_message'))) !!}
+                                    {!! Form::button(trans('forms.save-changes'), array('class' => 'btn btn-success btn-block margin-bottom-1 mt-3 mb-2','type' => 'button', 'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => trans('modals.edit_user__modal_text_confirm_title'), 'data-message' => trans('modals.edit_user__modal_text_confirm_message'))) !!}
                                 </div>
                             </div>
                         {!! Form::close() !!}

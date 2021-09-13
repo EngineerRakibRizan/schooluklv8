@@ -118,6 +118,17 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
             'deleted',
         ],
     ]);
+    
+    Route::get('assign-lesson/{id}', 'App\Http\Controllers\UsersManagementController@assign_lesson'); 
+
+    Route::get('lessons', 'App\Http\Controllers\LessonController@index'); 
+    Route::get('lesson-delete/{id}', 'App\Http\Controllers\LessonController@destroy'); 
+    Route::get('edit-lesson/{id}', 'App\Http\Controllers\LessonController@edit'); 
+    Route::get('create-lesson', 'App\Http\Controllers\LessonController@create'); 
+    Route::post('lesson-store', 'App\Http\Controllers\LessonController@store')->name('lesson.store');
+    Route::post('lesson-update/{id}', 'App\Http\Controllers\LessonController@update')->name('lesson.update');
+    Route::post('assign-store', 'App\Http\Controllers\UsersManagementController@assign_store')->name('assign.store');
+
     Route::post('search-users', 'App\Http\Controllers\UsersManagementController@search')->name('search-users');
 
     Route::resource('themes', \App\Http\Controllers\ThemesManagementController::class, [
