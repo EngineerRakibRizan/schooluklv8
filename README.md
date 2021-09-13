@@ -1,7 +1,7 @@
 
 
 ### Installation Instructions
-1. Run `git clone https://github.com/EngineerRakibRizan/schooluklv8.git schooluklv8`
+1. Run `click on code and download as a zip`
 2. Create a MySQL database for the project
     * ```mysql -u root -p```, if using Vagrant: ```mysql -u homestead -psecret```
     * ```create database laravelAuth;```
